@@ -78,6 +78,13 @@ public class DashboardPageObjects {
 		int ran = (int) (Math.random() * 5);
 		walk.selectByVisibleText(niz[ran]);
 	}
+	
+	
+	//Click on Walk field and select one tranport
+	public static void clickWalk(WebDriver dr, String nesto) {
+		Select walk =new Select(dr.findElement(By.xpath(WALK)));
+		walk.selectByVisibleText(nesto);
+	}
 	// --------------------------------------------
 	
 

@@ -101,6 +101,13 @@ public class PostObjests {
 		walk.selectByVisibleText(niz[ran]);
 	}
 	// --------------------------------------------
+	
+	//Click on Walk field and select one tranport
+	public static void clickWalk(WebDriver dr, String nesto) {
+		Select walk =new Select(dr.findElement(By.id(EDIT_TRANSPORT)));
+		walk.selectByVisibleText(nesto);
+	}
+	// --------------------------------------------
 
 	// Find Opis field
 	public static WebElement getEditOpis(WebDriver dr) {
