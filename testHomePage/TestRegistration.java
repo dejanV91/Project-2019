@@ -13,22 +13,8 @@ public class TestRegistration {
 
 //////////// User insert datas in register fields at Home Page//////////////////
 
-	public static void insertOneReg(WebDriver dr) {
-		String firstName, lastName, userName, email, password;
-		Scanner input = new Scanner(System.in);
-
-		System.out.println("--User Registrarion--");
-		System.out.println("Insert first name: ");
-		firstName = input.next();
-		System.out.println("Insert last name: ");
-		lastName = input.next();
-		System.out.println("Insert user name: ");
-		userName = input.next();
-		System.out.println("Insert email: ");
-		email = input.next();
-		System.out.println("Insert password: ");
-		password = input.next();
-		
+	public static void insertOneReg(WebDriver dr, String firstName, String lastName, String userName, String email,
+			String password) {
 
 		HomePageObjects.setFirstName(dr, firstName);
 		HomePageObjects.setLastName(dr, lastName);
@@ -37,17 +23,8 @@ public class TestRegistration {
 		HomePageObjects.setPassword(dr, password);
 		HomePageObjects.clickRegisterButton(dr);
 
-		// If the email is not a specific form, delete all datas from all fields
-		Pattern sablon = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+(.+)[a-zA-Z]{2,6}$");
-		Matcher m = sablon.matcher(email);
-		if (!m.find()) {
-			HomePageObjects.getFrstName(dr).clear();
-			HomePageObjects.getLastName(dr).clear();
-			HomePageObjects.getUserName(dr).clear();
-			HomePageObjects.getEmail(dr).clear();
-			HomePageObjects.getPassword(dr).clear();
-		}
 		
+
 	}
 
 ////////////  Automation insert datas in Register fields  /////////////////////////////////

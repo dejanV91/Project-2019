@@ -15,26 +15,12 @@ public class TestLogIn {
 	////////////////////////////////////////////////////////////////////////////////////////
 
 	// User Log In
-	public static void insertOneDataLog(WebDriver dr) {
-		System.out.println("--User Log In--");
-		String userName, password;
-		Scanner input=new Scanner(System.in);
-		
-		System.out.println("Insert user name: ");
-		userName = input.next();
-		System.out.println("Insert password: ");
-		password = input.next();
+	public static void insertOneDataLog(WebDriver dr, String userName,String password) {
 
 		HomePageObjects.setUserNameLog(dr, userName);
 		HomePageObjects.setPasswordLog(dr, password);
 		HomePageObjects.clickLogInButton(dr);
 
-		if (dr.getCurrentUrl().equals(URL_NO_LOG)) {
-			System.out.println("Unsuccessful log in!!");
-			HomePageObjects.navigateHome(dr);
-		} else {
-			System.out.println("Successful log in!!");
-		}
 		
 	}
 
