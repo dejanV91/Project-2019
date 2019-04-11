@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import constants.Constant;
+import constants.ExcelData;
+import gui.GuiDeleteAuto;
+import gui.GuiRegistration;
 import pageObjects.HomePageObjects;
 import testDashboard.TestDashboard;
 import testDashboard.TestDeletePosts;
@@ -13,50 +16,40 @@ import testHomePage.TestRegistration;
 
 public class TasksOfProject {
 
-	public static void Tasks() throws InterruptedException {
+	public static void automationTest() throws Exception {
 		WebDriver dr = new ChromeDriver();
 		dr.get(Constant.URL);
 		dr.manage().window().maximize();
 		Thread.sleep(2000);
 
-		try {
+		// (1) Registration with a set of data from Excel
+		TestRegistration.InsertDatasInReg(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME);
 
-			// (1) User registration
-			TestRegistration.insertOneReg(dr);
+		// (2) Log in with set of data from Excel
+		TestLogIn.insertLogIn(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME);
 
-			// (2) Registration with a set of data from Excel
-			TestRegistration.InsertDatasInReg(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME);
+		// (3) Automation create posts
+		String a, b;
+		ExcelData.setExcelFile(Constant.EXCEL_PATH, Constant.SHEET_NAME);
+		a = ExcelData.getCellData(1, 2);
+		b = ExcelData.getCellData(1, 4);
+		TestLogIn.insertOneDataLog(dr, a, b);
+		TestDashboard.insertDataInPost(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME_TEKST);
 
-			// (3) User Log In
-			TestLogIn.insertOneDataLog(dr);
-			HomePageObjects.navigateHome(dr);
+		// (4) Delete the first two posts
+		TestDeletePosts.deleteFirstTwoPosts(dr);
 
-			// (4) Log in with set of data from Excel
-			TestLogIn.insertLogIn(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME);
+		// (5) Delete more
+		GuiDeleteAuto.GuiDeleteAuto(dr);
+	}
 
-			// (5) User creating posts
-			TestLogIn.insertOneDataLog(dr);
-			TestDashboard.insertOneDataInPost(dr);
+	public static void manualTest() throws InterruptedException {
+		WebDriver dr = new ChromeDriver();
+		dr.get(Constant.URL);
+		dr.manage().window().maximize();
+		Thread.sleep(2000);
 
-			// (6) Automation create posts
-			TestDashboard.insertDataInPost(dr, Constant.EXCEL_PATH, Constant.SHEET_NAME_TEKST);
-
-			// (7) Delete the first two posts
-			TestDeletePosts.deleteFirstTwoPosts(dr);
-
-			// (8) Delete a specific number of posts
-			TestDeletePosts.deleteSomePost(dr);
-
-			// (9) Edit post
-			TestEditPost.insertEditPost(dr, 3);
-			
-			// Delete more
-			TestDeletePosts.deletePost(dr);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
+		GuiRegistration.GuiReg(dr);
 
 	}
 
