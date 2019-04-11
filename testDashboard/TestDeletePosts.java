@@ -15,39 +15,21 @@ public class TestDeletePosts {
 			PostObjests.clickDelete(dr, 0);
 		}
 	}
-	
+
 	// Delete large quantities and a specific post
-	public static void deleteSomePost(WebDriver dr) {
-		Scanner input = new Scanner(System.in);
-		int noPost, indexPost;
-		
-		System.out.println("--Delete posts--");
-		System.out.println("How much you want delete?: ");
-		noPost=input.nextInt();
-		
-		for (int i = 0; i < noPost; i++) {
-			System.out.println("What post you want (insert number): ");
-			indexPost=input.nextInt();
+	public static void deleteSomePost(WebDriver dr, int indexPost) {
+			
 			PostObjests.clickThree(dr, indexPost);
 			PostObjests.clickDelete(dr, indexPost);
 		}
-		
-	}
-	
-	//Deleting a specific number of posts
-	public static void deletePost(WebDriver dr) {
-		Scanner input = new Scanner(System.in);
-		int noPost;
-		
-		System.out.println("--Delete posts--");
-		System.out.println("How much you want delete?: ");
-		noPost=input.nextInt();
-		
-		
+
+	// Deleting a specific number of posts
+	public static void deletePost(WebDriver dr, int noPost) {
+
 		for (int i = 0; i < noPost; i++) {
 			PostObjests.clickThree(dr, 0);
 			PostObjests.clickDelete(dr, 0);
 		}
-		
+
 	}
 }

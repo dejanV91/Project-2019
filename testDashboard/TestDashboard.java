@@ -10,30 +10,21 @@ import pageObjects.DashboardPageObjects;
 public class TestDashboard {
 
 	// User make one post
-	public static void insertOneDataInPost(WebDriver dr) {
-		Scanner input = new Scanner(System.in);
-		String naziv, lokacija, opis;
+	public static void insertOneDataInPost(WebDriver dr, String title, String location, String trans, String desc) {
+
 		// Click "Make a post" button
 		DashboardPageObjects.clickMkPostButton(dr);
 
-		System.out.println("Creating post: ");
-		System.out.println("Insert Title: ");
-		naziv = input.next();
-		System.out.println("Insert Location: ");
-		lokacija = input.next();
-		System.out.println("Insert Description: ");
-		opis = input.next();
-
 		// Insert datas in Naziv, Lokacija, Walk and Opis fields
 		DashboardPageObjects.clickNaziv(dr);
-		DashboardPageObjects.setNaziv(dr, naziv);
-		DashboardPageObjects.setLokacija(dr, lokacija);
-		DashboardPageObjects.clickRandomWalk(dr);
-		DashboardPageObjects.setOpis(dr, opis);
+		DashboardPageObjects.setNaziv(dr, title);
+		DashboardPageObjects.setLokacija(dr, location);
+		DashboardPageObjects.clickWalk(dr, trans);
+		DashboardPageObjects.setOpis(dr, desc);
 
 		// Click on Post Button
 		DashboardPageObjects.clickPostButton(dr);
-		
+
 	}
 
 	// Automation insert datas in Post fields from Excel
